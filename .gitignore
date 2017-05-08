@@ -29,3 +29,6 @@
 *.app
 
 build/
+*.swp
+*.swo
+*.zip

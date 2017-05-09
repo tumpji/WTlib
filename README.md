@@ -1,6 +1,6 @@
 # Bachelor_thesis
 Bakalářská práce - bezeztrátová komprese obrazu s využitím vlnkové transformace.
-Práce je pod licencí GNU Lesser General Public License 2.1 uloženou v souboru LICENSE, výjimku tvoří soubor thirdparty, který obsahuje složky s vlastní licencí.
+Práce je pod licencí GNU Lesser General Public License 2.1 uloženou v souboru LICENSE, výjimku tvoří složka thirdparty, která obsahuje složky s vlastními licencemi.
 
 Program je překládán pomocí CMake, Make.
 Pro kompilaci knihovny je nutná podpora vícevláknového programování (standardní knihovna C++).

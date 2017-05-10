@@ -1,4 +1,4 @@
-# Bachelor_thesis
+# WTlib
 Bakalářská práce - bezeztrátová komprese obrazu s využitím vlnkové transformace.
 Práce je pod licencí GNU Lesser General Public License 2.1 uloženou v souboru LICENSE, výjimku tvoří složka thirdparty, která obsahuje složky s vlastními licencemi.
 

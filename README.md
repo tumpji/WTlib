@@ -1,34 +1,48 @@
 # WTlib
 Bakalářská práce - bezeztrátová komprese obrazu s využitím vlnkové transformace.
-Práce je pod licencí GNU Lesser General Public License 2.1 uloženou v souboru LICENSE, výjimku tvoří složka thirdparty, která obsahuje složky s vlastními licencemi.
+This project is under GNU Lesser General Public License 2.1 saved in file "LICENSE" an exception is folder "thirdparty".
+This folder has subfolders with their own licences.
 
-Program je překládán pomocí CMake, Make.
-Pro kompilaci knihovny je nutná podpora vícevláknového programování (standardní knihovna C++).
-Pro kompilaci programu je navíc nutné mít Boost C++, CImg knihovna (součást zdroje), libpng.
+Program and library require CMake, Make, C++ compiler with multithreading support.
+Program additionally requires Boost C++, CImg library (contents of folder "thirdparty"), libpng library.
 
 ## Program
-Použití programu je stručně shrnuto v nápovědě programu (-h, --help).
-Kvůli bezeztrátovosti program přijme a vytváří soubory formátu PNG.
+To display a summary of all posible commands and its uses, use -h or --help. 
+Further explanation of some more complicated commands can be found in thesis attachment.
+Program inputs and outputs are PNG files and proposed format.
 
 
+## Library
+The entire interface can be found in the file "include/wt.h".
+There are three main objects: WTencoder (encoding), WTdecoder (decoding), WTcommon (settings for both WTencoder and WTdecoder).
+As an example, a program was created (folder "demo").
 
-## Knihovna
-Knihovnu lze ovládat pomocí tříd WTencoder a WTdecoder (potažmo WTcommon).
-Jako příklad použití je připraven ukázkový program.
 
-### Kódování
-Pro zakódování dat je nutné zvolit metodu zpracování.
-Toto se provádí třídou WTcommon, které se nastaví třídní proměnné.
+### Encoding
+There are many configurations for encoding data.
+It is possible to change this setting by modifying object WTcommon.
 
-barevny_prostor, vlnka, dekompozice, dekompozice_max (počet úrovní), dekompozice_min_rozmer (pokračování další WT při splnění tohoto rozměru), dekompozice_side_level (rozklad vedlejších pásem viz práce), prediktor_pred (prediktor na originální data), prediktor_pasmo (výběr zvláštního prediktoru pro dané pásmo), koder a vyjimka_koder (vyběr entropického kodéru)
+List of all posible variables:
+barevny_prostor (color transform used), 
+vlnka (wavelet), 
+dekompozice (image decomposition used in wavelet transform -- tensor product or red-black wavelet transform), 
+dekompozice_max (maximum number of levels used in wavelet transform aka. maximum multiresolution level), 
+dekompozice_min_rozmer (minimum width and height to continue wavelet transform), 
+dekompozice_side_level (maximum WT levels used on H and LH(-1) bands), 
+prediktor_pred (predictor before WT), 
+prediktor_pasmo (predictor for specific band before entropy coder), 
+koder (entropy coder used), 
+vyjimka_koder (entropy coder exception for specific band)
 
-Další krok je vkládání pásem, pomocí metody WTencoder::vlozit_pasmo.
-Poslední fáze je zavolání WTencoder::start( std::string cesta_vystupu ).
+The most important method is WTencoder::vlozit_pasmo.
+This method loads data into the WTencoder object.
+Finaly WTencoder::start( std::string path ) starts compression and creates file in proposed format.
 
-### Dekódování
-Dekódování probíha jednodušeji, spustí se WTdecoder::start( std::string cesta ), to je vše.
-Každý komprimovaný soubor s sebou nese informaci o způsobu komprimace, takže není nutné vyplňovat WTcommon.
-WTcommon nicméně může sloužit pro zpětné zjištění způsobu komprese předaného souboru.
+### Decoding
+Decoding is mutch simpler because WTcommon is filled automaticly based on encoded file.
+Use method std::vector<WTdata> WTdecoder::start( std::string path ) for it.
+
+
 
 
 

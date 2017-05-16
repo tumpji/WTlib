@@ -1,4 +1,7 @@
 # WTlib
+WTlib is program/library for lossless image compression.
+It uses wavelet transform (classic or red-black), predictors, color transforms, EBCOT or other arithmetic coding.
+
 This project is under GNU Lesser General Public License 3.0 saved in file "LICENSE" an exception is folder "thirdparty".
 This folder has subfolders with their own licences.
 

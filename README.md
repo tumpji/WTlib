@@ -1,6 +1,5 @@
 # WTlib
-Bachelor's thesis - lossless image compression using wavelet transform.
-This project is under GNU Lesser General Public License 2.1 saved in file "LICENSE" an exception is folder "thirdparty".
+This project is under GNU Lesser General Public License 3.0 saved in file "LICENSE" an exception is folder "thirdparty".
 This folder has subfolders with their own licences.
 
 Program and library require CMake, Make, C++ compiler with multithreading support.

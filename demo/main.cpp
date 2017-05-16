@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 
-// kvuli parsovani argumentu je nutne mit boost
+// boost lib for parsing args
 #include <boost/program_options.hpp>
 namespace po = boost::program_options;
 
@@ -10,11 +10,11 @@ namespace po = boost::program_options;
 #include "main.h"
 
 
-// io pro data, co putuji do knihovny
+// IO WTlib
 #include "wt.h"
 #include "wt_converter.h"
 
-// io pro obrazky aka std::vector<WTlib::WTdata>
+// Load and save pics
 #include "pics_converter.h"
 
 
@@ -40,7 +40,7 @@ int main (int argc, char** argv) {
 	std::string		vstupni_soubor, 
 					vystupni_soubor;
 
-	// parsovani argumentu viz main.cpp (dole)
+	// args. parse
 	if ( parse_options(argc, argv, opts, vstupni_soubor, vystupni_soubor) ) {
 		std::cerr << "Error occured during parsing options..." << std::endl;
 		return 1;
@@ -54,7 +54,7 @@ int main (int argc, char** argv) {
 		auto tmp = load_obrazek(vstupni_soubor);
 		save_obrazek(vystupni_soubor, tmp);
 	}
-	else if ( not opts.decoder_switch ) { // koder
+	else if ( not opts.decoder_switch ) { // coder
 		cerr << "Coding picture \""  << vstupni_soubor 
 			 << "\"  to file \"" << vystupni_soubor << "\""	<< endl;
 		cerr << opts.metoda;
@@ -91,7 +91,7 @@ int main (int argc, char** argv) {
 ////////////////////////////////////////////////////////////////////////////////
 //******************************************************************************
 //..............................................................................
-// argumenty programu
+// parsing program args
 
 static unsigned char char_to_cislo ( char p ) {
 #define MEZI(A,X,Y) ( ((A)>=(X)) and ((A)<=(Y)) )
@@ -115,7 +115,7 @@ static char cislo_to_char ( unsigned char c ) {
 		return c - 10 + 'A';
 }
 
-// napovede
+// generates options
 template<typename T>
 std::string  provide_options () {
 	std::string tmp = "\n";
@@ -130,7 +130,7 @@ std::string  provide_options () {
 	return tmp;
 }
 
-// vyjimka pro prediktor (znaky jsou povoleny kvuli postpredict)
+// generate options for predictor 1,2,3 .. , 9, A, B...
 template<>
 std::string  provide_options<WTlib::PREDIKTOR> () {
 	std::string tmp = "\n";

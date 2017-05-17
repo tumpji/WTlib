@@ -38,35 +38,35 @@ class Entropicky_koder;
 /* jeden prikaz
  * ten rika, co se s daty ma delat a jak */
 class Command {
-	public:
-		Command () {};
-		virtual ~Command () {};
+    public:
+        Command () {};
+        virtual ~Command () {};
 
-		virtual void call (Environment*) = 0;
-		virtual std::string whoami () { return oznaceni; } 
-	protected:
-		std::string oznaceni;
+        virtual void call (Environment*) = 0;
+        virtual std::string whoami () { return oznaceni; } 
+    protected:
+        std::string oznaceni;
 };
 
 
 // kolekce clenu spravujici zasobniky v Env 
 struct Environment_stacks {
 
-	/* zásobník příkazů, 
-	 * každý představuje 
-	 * operaci nad obrázkem */
-	std::stack<Shared_command>  command_stack;
+    /* zásobník příkazů, 
+     * každý představuje 
+     * operaci nad obrázkem */
+    std::stack<Shared_command>  command_stack;
 
-	// zde budou ulozeny prazdne alokovane data k vyplneni
-	// nebo vyplnena data ktera cekaji na entropicky koder (kodovani)
-	std::stack<Shared_data>     data_stack; 
-	// sem uklada entropicky koder data ktere prave dekodoval 
-	// a na tomto stacku se provadi rekonstrukce
-	std::stack<Shared_data>     data_stack_recon; 
+    // zde budou ulozeny prazdne alokovane data k vyplneni
+    // nebo vyplnena data ktera cekaji na entropicky koder (kodovani)
+    std::stack<Shared_data>     data_stack; 
+    // sem uklada entropicky koder data ktere prave dekodoval 
+    // a na tomto stacku se provadi rekonstrukce
+    std::stack<Shared_data>     data_stack_recon; 
 
-	// manipulace s command_stack
-	void            push_command (Shared_command);
-	Shared_command  get_command (); // top + pop
+    // manipulace s command_stack
+    void            push_command (Shared_command);
+    Shared_command  get_command (); // top + pop
 };
 
 
@@ -74,18 +74,18 @@ struct Environment_stacks {
  * i vicevlaknove */
 class WTlib::Environment : public WTio::IO_thread, public Environment_stacks {
 public:
-	// konstruktory 
-	Environment (WTlib::WTencoder*, std::string cesta);
-	Environment (WTlib::WTdecoder*, std::string cesta);
+    // konstruktory 
+    Environment (WTlib::WTencoder*, std::string cesta);
+    Environment (WTlib::WTdecoder*, std::string cesta);
 
-	// zacatek provadeni transformace (vcetne z5)
-	void start (); 
+    // zacatek provadeni transformace (vcetne z5)
+    void start (); 
 
 
-	// zde lze najit nastaveni  z WTencoder / WTdecoder
-	WTcommon* nastaveni;
-	// znaci jakym smerem je prave kodovano/dekodovano
-	SMER smer;
+    // zde lze najit nastaveni  z WTencoder / WTdecoder
+    WTcommon* nastaveni;
+    // znaci jakym smerem je prave kodovano/dekodovano
+    SMER smer;
 };
 
 
@@ -99,13 +99,13 @@ public:
 /////////////////
 // comm stack inline 
 inline Shared_command  Environment_stacks::get_command () {
-	auto top = command_stack.top();
-	command_stack.pop();
-	return top;
+    auto top = command_stack.top();
+    command_stack.pop();
+    return top;
 }
 
 inline void  Environment_stacks::push_command (Shared_command comm) {
-	command_stack.push(comm);
+    command_stack.push(comm);
 }
 
 

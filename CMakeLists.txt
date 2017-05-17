@@ -11,16 +11,16 @@ SET(CImg_header ${CMAKE_SOURCE_DIR}/thirdparty/CImg-2.0.0_pre021617)
 
 
 MACRO(ADD_COMPILE_ARG  X)
-	SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${X}" )
+    SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${X}" )
 ENDMACRO(ADD_COMPILE_ARG)
 
 MACRO(ADD_LINK_ARG  X)
-	SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${X}" )
+    SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${X}" )
 ENDMACRO(ADD_LINK_ARG)
 
 MACRO(ADD_ARG X)
-	ADD_COMPILE_ARG("${X}")
-	ADD_LINK_ARG("${X}")
+    ADD_COMPILE_ARG("${X}")
+    ADD_LINK_ARG("${X}")
 ENDMACRO(ADD_ARG)
 
 
@@ -31,24 +31,24 @@ set(release ON)
 ADD_COMPILE_ARG(-std=c++17)
 
 if (debug) 
-	message( INFO "DEBUG ...")
-	ADD_ARG(-O0)
-	ADD_ARG(-g3)
-	ADD_ARG(-ggdb)
+    message( INFO "DEBUG ...")
+    ADD_ARG(-O0)
+    ADD_ARG(-g3)
+    ADD_ARG(-ggdb)
 
-	ADD_ARG(-Werror)
-	ADD_ARG(-Wextra)
+    ADD_ARG(-Werror)
+    ADD_ARG(-Wextra)
 elseif (profile)
-	message( INFO "PROFILOVANI...")
-	ADD_ARG(-DNDEBUG)
-	ADD_ARG(-O3)
+    message( INFO "PROFILOVANI...")
+    ADD_ARG(-DNDEBUG)
+    ADD_ARG(-O3)
 
-	ADD_ARG(-pg)
+    ADD_ARG(-pg)
 elseif(release)
-	#ADD_ARG(-DNDEBUG)
-	ADD_ARG(-O3)
+    #ADD_ARG(-DNDEBUG)
+    ADD_ARG(-O3)
 else()
-	message(FATAL_ERROR "Neznam jakym zpusobem mam kompilovat")
+    message(FATAL_ERROR "Neznam jakym zpusobem mam kompilovat")
 endif()
 
 

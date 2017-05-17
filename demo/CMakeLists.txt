@@ -9,8 +9,8 @@ FIND_PACKAGE( Boost 1.40 COMPONENTS program_options REQUIRED )
 FIND_PACKAGE( Threads REQUIRED )
 
 ADD_EXECUTABLE( ${PROJECT_NAME} 
-				${${PROJECT_NAME}_headers} 
-				${${PROJECT_NAME}_sources} )
+                ${${PROJECT_NAME}_headers} 
+                ${${PROJECT_NAME}_sources} )
 
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} wt)
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${Boost_PROGRAM_OPTIONS_LIBRARY})

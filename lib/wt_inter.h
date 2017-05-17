@@ -29,8 +29,8 @@ using WTlib::KODOVACI_MOZNOST;
 using WTlib::KODER;
 
 enum class SMER {
-	KODER, 
-	DEKODER
+    KODER, 
+    DEKODER
 };
 
 

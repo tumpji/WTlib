@@ -43,53 +43,53 @@
 
 class Rozlozeni : public Command {
 public:
-	Rozlozeni ( bool sablona) : sablona(sablona) { }
+    Rozlozeni ( bool sablona) : sablona(sablona) { }
 
-	virtual void call (Environment*) = 0;
+    virtual void call (Environment*) = 0;
 protected:
-	bool sablona;
+    bool sablona;
 
 private:
-	// zajsituje ziskavani dat a jejich mazani
-	Shared_data get_from_stack (std::stack<Shared_data>& s) {
-		auto data = s.top();
-		s.pop();
-		return data;
-	}
+    // zajsituje ziskavani dat a jejich mazani
+    Shared_data get_from_stack (std::stack<Shared_data>& s) {
+        auto data = s.top();
+        s.pop();
+        return data;
+    }
 
 
 protected:
-	// koder bere vzdy z hlavniho stacku
-	// dekoder-sablona bere s hlavniho stacku
-	// dekoder-!sablona bere s vedlejsiho recon stacku
-	Shared_data 
-	get_data (Environment* env) 
-	{
-		// rozklada se rovnou data 
-		if ( IS_KODER ) {
-			return get_from_stack(env->data_stack);
-		} else if ( sablona ) { // dekoder
-			return get_from_stack(env->data_stack);
-		} else {
-			return get_from_stack(env->data_stack_recon);
-		}
-	}
+    // koder bere vzdy z hlavniho stacku
+    // dekoder-sablona bere s hlavniho stacku
+    // dekoder-!sablona bere s vedlejsiho recon stacku
+    Shared_data 
+    get_data (Environment* env) 
+    {
+        // rozklada se rovnou data 
+        if ( IS_KODER ) {
+            return get_from_stack(env->data_stack);
+        } else if ( sablona ) { // dekoder
+            return get_from_stack(env->data_stack);
+        } else {
+            return get_from_stack(env->data_stack_recon);
+        }
+    }
 
-	// koder vklada do hlavniho stejne jako sablona u dekoderu
-	// nesablona u dekoderu vklada do vedlejsiho rekon
-	void push_data (Environment* env, Shared_data data) {
-		if ( IS_KODER )
-			env->data_stack.push(data);
-		else if ( sablona ) 
-			env->data_stack.push(data);
-		else
-			env->data_stack_recon.push(data);
-	}
+    // koder vklada do hlavniho stejne jako sablona u dekoderu
+    // nesablona u dekoderu vklada do vedlejsiho rekon
+    void push_data (Environment* env, Shared_data data) {
+        if ( IS_KODER )
+            env->data_stack.push(data);
+        else if ( sablona ) 
+            env->data_stack.push(data);
+        else
+            env->data_stack_recon.push(data);
+    }
 };
 
 template< typename Trida, typename ... Args >
 inline static void COMMAND_PUSH( Environment *env, Args ... args ) {
-	env->push_command( std::make_shared<Trida>( args... ) );
+    env->push_command( std::make_shared<Trida>( args... ) );
 }
 
 

@@ -26,9 +26,9 @@
 // provede barevnou transformaci 
 // samo si hleda smer
 void provest_barevnou_transformaci (
-		SMER,
-		WTlib::BAREVNY_PROSTOR,
-		std::vector<Shared_data>& );
+        SMER,
+        WTlib::BAREVNY_PROSTOR,
+        std::vector<Shared_data>& );
 
 
 #endif // WT_BAREVNA_TRANSFORMACE_INCLUDED

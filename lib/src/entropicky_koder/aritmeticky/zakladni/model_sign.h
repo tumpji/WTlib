@@ -25,10 +25,10 @@ namespace SignModel {
 
 // bazova trida, ktera slouzi pro ulozeni znamenka z libovolnych dat
 struct SignModel_base {
-	virtual void 
-		encode ( Environment*, Aritmeticky_koder &, Shared_data data, OZNACENI_PASMA pasmo ) = 0;
-	virtual std::vector<bool> 
-		decode ( Environment*, Aritmeticky_koder &, Shared_data data, OZNACENI_PASMA pasmo ) = 0;
+    virtual void 
+        encode ( Environment*, Aritmeticky_koder &, Shared_data data, OZNACENI_PASMA pasmo ) = 0;
+    virtual std::vector<bool> 
+        decode ( Environment*, Aritmeticky_koder &, Shared_data data, OZNACENI_PASMA pasmo ) = 0;
 };
 
 enum Type { T32 };

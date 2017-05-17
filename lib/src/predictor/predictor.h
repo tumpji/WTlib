@@ -26,11 +26,11 @@ namespace Predictor {
 
 class Predictor {
 public:
-	Predictor () {}
-	virtual ~Predictor () {}
+    Predictor () {}
+    virtual ~Predictor () {}
 
-	virtual void forward_predict (Shared_data) = 0;
-	virtual void reverse_predict (Shared_data) = 0;
+    virtual void forward_predict (Shared_data) = 0;
+    virtual void reverse_predict (Shared_data) = 0;
 };
 
 using Shared = std::shared_ptr<Predictor>;

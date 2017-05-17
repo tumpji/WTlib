@@ -25,64 +25,64 @@
 #include "sber_statistik.h"
 
 namespace {
-	std::map<WTlib::OZNACENI_PASMA, int> mapa_velikosti_pasmo;
-	std::vector<int> vec_velikosti_uroven;
+    std::map<WTlib::OZNACENI_PASMA, int> mapa_velikosti_pasmo;
+    std::vector<int> vec_velikosti_uroven;
 
-	std::mutex mutex;
+    std::mutex mutex;
 }
 
 void stat::vlozit_velikost_zakodovaneho_pasma (
-		Environment* env,
-		WTlib::OZNACENI_PASMA pasmo,
-		int velikost )
+        Environment* env,
+        WTlib::OZNACENI_PASMA pasmo,
+        int velikost )
 {
-	using PASMO = WTlib::OZNACENI_PASMA;
-	(void)env;
+    using PASMO = WTlib::OZNACENI_PASMA;
+    (void)env;
 
-	::mutex.lock();
+    ::mutex.lock();
 
-	// samotne pridavani
-	auto s = mapa_velikosti_pasmo.find(pasmo);
-	if ( s == mapa_velikosti_pasmo.end() )
-		mapa_velikosti_pasmo[pasmo] = velikost;
-	else 
-		s->second += velikost;
+    // samotne pridavani
+    auto s = mapa_velikosti_pasmo.find(pasmo);
+    if ( s == mapa_velikosti_pasmo.end() )
+        mapa_velikosti_pasmo[pasmo] = velikost;
+    else 
+        s->second += velikost;
 
 
-	// ----------- vec_velikosti_uroven --------------
+    // ----------- vec_velikosti_uroven --------------
 
-	/*
-	// lze nahradit hystorii
-	//static PASMO last_pasmo = PASMO::Last;
-	static int aktualni_uroven = 0;
+    /*
+    // lze nahradit hystorii
+    //static PASMO last_pasmo = PASMO::Last;
+    static int aktualni_uroven = 0;
 
-	if ( pasmo == PASMO::YELLOW || pasmo == PASMO::LH )
-		aktualni_uroven += 1;
+    if ( pasmo == PASMO::YELLOW || pasmo == PASMO::LH )
+        aktualni_uroven += 1;
 
-	// samotne pridavani
-	if ( vec_velikosti_uroven.size() < static_cast<unsigned>(aktualni_uroven) + 1 )
-		vec_velikosti_uroven.push_back(velikost);
-	else
-		*vec_velikosti_uroven.rbegin() += velikost;
-		*/
+    // samotne pridavani
+    if ( vec_velikosti_uroven.size() < static_cast<unsigned>(aktualni_uroven) + 1 )
+        vec_velikosti_uroven.push_back(velikost);
+    else
+        *vec_velikosti_uroven.rbegin() += velikost;
+        */
 
-	::mutex.unlock();
-	return;
+    ::mutex.unlock();
+    return;
 }
 
 
 void stat::tisk_statistiky (Environment* env)
 {
-	(void)env;
-	using std::cerr; using std::endl;
+    (void)env;
+    using std::cerr; using std::endl;
 
-	for ( const auto pasmo : mapa_velikosti_pasmo ) {
-		cerr << "#0  " << to_string(pasmo.first) << ":" << pasmo.second << endl;
-	}
+    for ( const auto pasmo : mapa_velikosti_pasmo ) {
+        cerr << "#0  " << to_string(pasmo.first) << ":" << pasmo.second << endl;
+    }
 
-	/*
-	for ( unsigned i = 0; i < vec_velikosti_uroven.size(); ++i ) {
-		cerr << "#1  " << i << ":" << vec_velikosti_uroven[i] << endl; 
-	}
-	*/
+    /*
+    for ( unsigned i = 0; i < vec_velikosti_uroven.size(); ++i ) {
+        cerr << "#1  " << i << ":" << vec_velikosti_uroven[i] << endl; 
+    }
+    */
 }
